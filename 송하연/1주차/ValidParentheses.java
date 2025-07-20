@@ -13,6 +13,7 @@ class Solution {
             if(ch == '(') { // char은 작은 따옴표
                 stack.push(String.valueOf(ch)); //String 형 변환  
             }
+                
             else if (ch == ')'){
                 if(stack.isEmpty()) answer = false;
                 else stack.pop();
