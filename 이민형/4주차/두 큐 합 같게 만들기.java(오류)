@@ -1,0 +1,50 @@
+import java.util.*;
+import java.util.stream.Collectors;
+
+class Solution {
+    public int answer = 300000;
+    public int temp = 0;
+    
+    public void back(Deque<Integer> queue1, Deque<Integer> queue2) {
+        if (queue1.isEmpty() || queue2.isEmpty()) { // 배열이 비어있다면
+            return;
+        }
+        
+        if (temp > (queue1.size() + queue2.size()) * 2) { // 작업 횟수 너무 많으면
+            return;
+        }
+        
+        if (queue1.stream().mapToInt(Integer::intValue).sum() == queue2.stream().mapToInt(Integer::intValue).sum()) { // 합이 같다면
+            if (temp < answer) { // 최솟값 비교
+                answer = temp;
+            }
+            return;
+        }
+        else { // 합이 같지 않다면
+            //queue1 dequeue해서 queue2에 enqueue
+            if (queue1.peek() == null) {
+                return;
+            }
+            queue2.addLast(queue1.pollFirst());
+            temp++;
+            back(queue1, queue2);
+            queue1.addFirst(queue2.pollLast());
+            temp--;
+            //queue2 dequeue해서 queue1에 enqueue
+            if (queue2.peek() == null) {
+                return;
+            }
+            queue1.addLast(queue2.pollFirst());
+            temp++;
+            back(queue1, queue2);
+        }
+    }
+    
+    public int solution(int[] queue1, int[] queue2) {
+        Deque<Integer> q1 = Arrays.stream(queue1).boxed().collect(Collectors.toCollection(ArrayDeque::new));
+        Deque<Integer> q2 = Arrays.stream(queue2).boxed().collect(Collectors.toCollection(ArrayDeque::new));
+        
+        back(q1, q2);
+        return answer;
+    }
+}
