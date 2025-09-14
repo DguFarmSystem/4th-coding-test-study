@@ -30,3 +30,4 @@
 
 - 라이브 코딩 테스트: 매 회차 스터디 시간에 1문제 풀이
 
+## 노션 링크: https://www.notion.so/224d56f5ec1280ddaf65d0feab1cd2d2?pvs=39
