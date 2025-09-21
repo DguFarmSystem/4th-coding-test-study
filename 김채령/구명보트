@@ -1,0 +1,27 @@
+class Solution {
+    public int solution(int[] people, int limit) {
+        
+        for(int i=0;i<people.length; i++){
+            for(int j=i+1;j<people.length; j++){
+                if(people[i]>people[j]){
+                    int tmp=people[i];
+                    people[i]=people[j];
+                    people[j]=tmp;
+                }
+            }
+        } // 배열 오름차순으로 재정렬
+        
+        int left=0, right=people.length-1;
+        int answer = 0;
+        
+        while(left<=right){
+            if(people[left]+people[right]<=limit){
+                left++; //둘이 같이 탑승
+            }
+            right--;
+            answer++;
+        }
+        return answer;
+    }
+}
+// 근데 효율성에서 깎임 -> 81.5/100
