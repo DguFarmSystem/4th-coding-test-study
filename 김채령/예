@@ -1,0 +1,34 @@
+class Solution {
+    public int solution(int[] d, int budget) {
+        int answer = 0;
+        
+        for(int i=0;i<d.length;i++){
+            for(int j=i+1; j<d.length; j++){
+                if(d[i]>d[j]){
+                    int tmp=d[i];
+                        d[i]=d[j];
+                        d[j]=tmp;
+                }
+                  
+            }
+        }
+        // 배열 재정렬 (오름차순)
+        int sum=0;
+        for(int i=0; i<d.length; i++){
+            sum+=d[i];
+            if(sum>budget){
+                answer=i;
+                break;
+            }
+            else if (sum==budget){
+                answer=i+1;
+                break;
+            }
+        }
+        if (sum < budget) answer = d.length;
+        // 이 예외처리는 만약 d의 모든원소를 더했을때도 budget을 넘기지 않을경우 d.length가 answe 값으로 반환되는 경우임
+        return answer;
+        
+    }
+}
+
